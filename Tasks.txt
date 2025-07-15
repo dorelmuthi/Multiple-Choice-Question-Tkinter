@@ -1,0 +1,4 @@
+Make a menu to choose the number of questions for the test.
+Make a restart bouton at the end and/or a button to go to the main menu.
+Make possible to register the score and display the list of scores.
+Make possible to choose the countries by continent, the data file must be updated

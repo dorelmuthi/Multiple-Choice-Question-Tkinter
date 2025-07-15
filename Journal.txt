@@ -1,0 +1,32 @@
+30/05/2025
+Parsing the countries
+
+16/06/2025
+Create the question controller.
+17/06/2025
+The question controller is now doing the actions related to the View clicks.
+18/06/2025
+Add a label to display the number of questions answered on the total of questions.
+
+Remove widget:
+https://www.geeksforgeeks.org/python/how-to-hide-recover-and-delete-tkinter-widgets/
+
+Drag and drop (Python):
+https://www.youtube.com/watch?v=oLxFqpUbaAE
+
+About pack layout in Tk:
+https://koor.fr/Python/Tutoriel_Tkinter/tkinter_layout_pack.wp
+
+19/06/2025
+Make a file per class.
+Solve the problems/warnings pointed out by Pylance.
+
+MVC example in python with tkinter:
+https://www.pythontutorial.net/tkinter/tkinter-mvc/
+
+MVC in Python:
+https://www.tutorialspoint.com/how-to-separate-view-and-controller-in-python-tkinter
+
+Code maintenable Python:
+https://openclassrooms.com/fr/courses/7160741-ecrivez-du-code-python-maintenable/7188877-implementez-le-controleur-et-la-vue-pour-votre-application
+
