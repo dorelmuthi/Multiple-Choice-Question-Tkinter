@@ -1,8 +1,9 @@
 from QuestionController import *
+from MainMCQ import App 
 import tkinter as tk
 
 class QuestionView(tk.Frame): # This is the graphical representation of the question
-    def __init__(self, root: tk.Tk, qC = None, **kwargs):
+    def __init__(self, root: App, qC = None, **kwargs):
         # Frame initialization and configuration
         super().__init__(root, borderwidth=2, relief=tk.SOLID, height = 50, width = 100, **kwargs)
         self.qC = qC
@@ -17,7 +18,11 @@ class QuestionView(tk.Frame): # This is the graphical representation of the ques
         self.qB = tk.Button()
         self.counterL = tk.Label() # The label containing the number of question answered
         self.resultLabel = tk.Label()
+        self.backToMenuB = tk.Button(self, text="Back to menu", command=root.displayMenuView)
+    def display(self):
         self.pack(expand=1) # place it on the root, expand=1 is used to center the frame in the root
+    def hide(self):
+        self.pack_forget()
     def setQuestionController(self, qC):
         # We init the display after receiving the controller
         self.qC = qC
@@ -32,6 +37,7 @@ class QuestionView(tk.Frame): # This is the graphical representation of the ques
         self.qB.pack()
         self.counterL = tk.Label(self, text="You have answered: 0/total", background=self.color)
         self.counterL.pack()
+        self.backToMenuB.pack()
     def printChoice(self): # QC
         print(self.strVarChoice.get())
     def setQuestionText(self, qText: str):

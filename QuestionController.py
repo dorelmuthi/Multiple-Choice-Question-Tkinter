@@ -1,7 +1,9 @@
 from Parser import *
 from QuestionModel import *
 from QuestionView import *
+
 import tkinter as tk
+import random as rand
 
 class QuestionController: # This class makes the link between model and view
     # Create question, move to the next question when answered
@@ -19,6 +21,7 @@ class QuestionController: # This class makes the link between model and view
         self.createQuestions()
         self.qV.initDisplay()
         self.loadQ()
+        self.qV.display()
     def createQuestion(self, i = 0):
         i = i if i <= len(self.countries) else len(self.countries)
         qM = QuestionModel(self.countries[i], self.countries)
