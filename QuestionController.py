@@ -5,16 +5,20 @@ import tkinter as tk
 
 class QuestionController: # This class makes the link between model and view
     # Create question, move to the next question when answered
-    def __init__(self):
-        self.qV = None
+    def __init__(self, qV):
+        self.qV = qV
         # Get parse the data
         p = Parser()
         self.countries = p.getCountries()
         print("Countries parsed: ", len(self.countries))
         self.questions = []
-        self.strVarChoice = None
+        self.strVarChoice = tk.StringVar(self.qV, value="Default")
         self.curQ = 0
         self.goodAnswerNb = 0
+    def run(self):
+        self.createQuestions()
+        self.qV.initDisplay()
+        self.loadQ()
     def createQuestion(self, i = 0):
         i = i if i <= len(self.countries) else len(self.countries)
         qM = QuestionModel(self.countries[i], self.countries)
@@ -36,6 +40,7 @@ class QuestionController: # This class makes the link between model and view
     def printChoice(self):
         print(self.strVarChoice.get())
     def checkResult(self): # called at each submit of answer
+        self.strVarChoice = self.qV.strVarChoice # get the selected value from the view
         if self.strVarChoice.get() == self.questions[self.curQ].getAnswer():
             print("The answer is correct")
             self.goodAnswerNb += 1
@@ -57,4 +62,5 @@ class QuestionController: # This class makes the link between model and view
 
 if __name__ == "__main__":
     print("Test")
-    qc = QuestionController()
+    #qV = None
+    #qc = QuestionController(qV)

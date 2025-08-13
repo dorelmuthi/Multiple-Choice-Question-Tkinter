@@ -14,11 +14,13 @@ class App(tk.Tk):
         super().__init__(**kwargs) # Iinitialize the class using the constructor of Tk
         self.title("MCQ - Countries capital")
         self.geometry("600x600")
+        # Create the question view
+        qV = QuestionView(self)
         # Create the question controller
-        qC = QuestionController()
-        # Display the question
-        qV = QuestionView(self, qC)
-        qV.pack(expand=1) # expand=1 is used to center the frame in the root
+        qC = QuestionController(qV)
+        # Set the controller to the view
+        qV.setQuestionController(qC)
+        qC.run() # Start the program through the controller
     def run(self):
         self.mainloop() # Starts the display of the application
 

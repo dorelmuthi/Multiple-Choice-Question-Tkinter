@@ -2,36 +2,38 @@ from QuestionController import *
 import tkinter as tk
 
 class QuestionView(tk.Frame): # This is the graphical representation of the question
-    def __init__(self, root: tk.Tk, qC, **kwargs):
+    def __init__(self, root: tk.Tk, qC = None, **kwargs):
         # Frame initialization and configuration
         super().__init__(root, borderwidth=2, relief=tk.SOLID, height = 50, width = 100, **kwargs)
+        self.qC = qC
         self.color = "sky blue" # Color chart: https://cs111.wellesley.edu/archive/cs111_fall14/public_html/labs/lab12/tkintercolor.html
         self.configure(background=self.color)
-        self.qC = qC
-        self.qC.setQV(self)
-        self.qC.createQuestions()
         # Frame widgets initialization
         self.qL = tk.Label() # Question Label
         #self.strVar = None # Used to get the value of the radio button selection
         self.choiceNb = 3 # the is used to create the radio buttons
         self.qChoicesRB = [] # radio buttons
+        self.strVarChoice = tk.StringVar(self, value="Default") # Contains the choice of the radio buttons
         self.qB = tk.Button()
         self.counterL = tk.Label() # The label containing the number of question answered
         self.resultLabel = tk.Label()
-        self.initDisplay()
-        # Load the first question
-        self.qC.loadQ()
+        self.pack(expand=1) # place it on the root, expand=1 is used to center the frame in the root
+    def setQuestionController(self, qC):
+        # We init the display after receiving the controller
+        self.qC = qC
     def initDisplay(self):
         self.qL = tk.Label(self, text="Question", background="light goldenrod")
         self.qL.pack()
         for i in range(self.choiceNb):
-            rb = tk.Radiobutton(self, text="capital", value="capital", variable=self.qC.strVarChoice, command=self.qC.printChoice, background=self.color)
+            rb = tk.Radiobutton(self, text="capital", value="capital", variable=self.strVarChoice, command=self.printChoice, background=self.color)
             rb.pack(anchor=tk.W, padx=10) # align to left
             self.qChoicesRB.append(rb)
-        self.qB = tk.Button(self, text="Submit answer", command=self.qC.checkResult, background="PaleGreen2")
+        self.qB = tk.Button(self, text="Submit answer", command=self.qC.checkResult, background="PaleGreen2") # type: ignore
         self.qB.pack()
         self.counterL = tk.Label(self, text="You have answered: 0/total", background=self.color)
         self.counterL.pack()
+    def printChoice(self): # QC
+        print(self.strVarChoice.get())
     def setQuestionText(self, qText: str):
         self.qL.configure(text=qText)
         # The following lines are doing the same thing as the line above
