@@ -15,9 +15,25 @@ class App(tk.Tk):
     def __init__(self, **kwargs):
         super().__init__(**kwargs) # Iinitialize the class using the constructor of Tk
         self.title("MCQ - Countries capital")
-        self.geometry("600x600")
+        self.appWidth = 600
+        self.appHeight = 600
+        self.appStartX, self.appStartY = self.getCenteredStartingPos()
+        self.geometry("{width}x{height}+{startX}+{startY}".format(
+            width = self.appWidth, height = self.appHeight, 
+            startX=self.appStartX, startY=self.appStartY))
         self.currentWindow = MenuView(self)
         self.currentWindow.display()
+
+    def getCenteredStartingPos(self):
+        """
+        Returns the centerd starting position on the basis of the screen size 
+        and the application size in pixels.
+        """
+        screenWidth = self.winfo_screenwidth()
+        screenHeight = self.winfo_screenheight()
+        appStartX = screenWidth // 2 - self.appWidth // 2
+        appStartY = screenHeight // 2 - self.appHeight // 2
+        return appStartX, appStartY
 
     def displayQuestionView(self):
         self.currentWindow.hide()
