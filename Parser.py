@@ -2,7 +2,7 @@
 This file contains the class that will parse the file containing the list of countries with their capital.
 """
 
-from Country import *
+from country import *
 
 class Parser:
     def __init__(self, verbose=False):

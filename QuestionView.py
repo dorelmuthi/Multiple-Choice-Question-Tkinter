@@ -1,5 +1,5 @@
-from QuestionController import *
-from MainMCQ import App 
+from questionctrl import *
+from main import App 
 import tkinter as tk
 
 class QuestionView(tk.Frame): # This is the graphical representation of the question

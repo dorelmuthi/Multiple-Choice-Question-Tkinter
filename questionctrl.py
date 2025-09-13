@@ -1,6 +1,6 @@
-from Parser import *
-from QuestionModel import *
-from QuestionView import *
+from parser import *
+from questionmodel import *
+from questionview import *
 
 import tkinter as tk
 import random as rand

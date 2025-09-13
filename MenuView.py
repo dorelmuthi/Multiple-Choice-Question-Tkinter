@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-#from MainMCQ import App
+#from main import App
 
 class MenuView(tk.Frame):
     def __init__(self, root, **kwargs):

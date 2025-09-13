@@ -7,9 +7,9 @@ from tkinter import messagebox
 # # about changing the style for frame in tkinter.ttk case:
 # https://stackoverflow.com/questions/54476511/setting-background-color-of-a-tkinter-ttk-frame
 
-from QuestionController import *
-from QuestionView import *
-from MenuView import *
+from questionctrl import *
+from questionview import *
+from menuview import *
 
 class App(tk.Tk):
     def __init__(self, **kwargs):

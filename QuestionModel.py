@@ -1,4 +1,4 @@
-from Country import *
+from country import *
 import random as rand
 
 class QuestionModel: # This is the logical representation of the question for the model
