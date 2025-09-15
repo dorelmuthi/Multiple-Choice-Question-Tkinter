@@ -7,7 +7,7 @@ import random as rand
 
 class QuestionController: # This class makes the link between model and view
     # Create question, move to the next question when answered
-    def __init__(self, question_view):
+    def __init__(self, question_view: QuestionView):
         """Initializes the QuestionController object."""
         self.question_view = question_view
         # Get parsed the data
