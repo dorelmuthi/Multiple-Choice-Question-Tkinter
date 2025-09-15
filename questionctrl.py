@@ -22,6 +22,9 @@ class QuestionController: # This class makes the link between model and view
         """Creates the questions and displays the first question."""
         self.create_questions()
         self.question_view.init_display()
+        # Set the commands/actions for the widgets of the view.
+        self.question_view.set_submit_command(self.check_result)
+        self.question_view.set_choice_command(self.print_choice)
         self.load_question()
         self.question_view.display()
 

@@ -29,7 +29,6 @@ class App(tk.Tk):
         """Returns the centerd starting position on the basis of the screen size 
         and the application size in pixels, in order to display the application centered
         on the screen of the computer."""
-
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
         app_start_x = screen_width // 2 - self.app_width // 2
@@ -43,9 +42,7 @@ class App(tk.Tk):
         question_view = QuestionView(self)
         # 2 Create the question controller and give the view to the controller
         question_ctrl = QuestionController(question_view)
-        # 3 Set the controller to the view
-        question_view.set_question_ctrl(question_ctrl)
-        # 4 Start the program through the controller
+        # 3 Start the program through the controller
         question_ctrl.run()
         self.current_window = question_view
 

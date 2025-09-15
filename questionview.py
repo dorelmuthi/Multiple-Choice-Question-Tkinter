@@ -1,13 +1,11 @@
-from questionctrl import *
 from main import App 
 import tkinter as tk
 
 class QuestionView(tk.Frame):
-    def __init__(self, root: App, question_ctrl = None, **kwargs):
+    def __init__(self, root: App, **kwargs):
         """Initializes the QuestionView class which is the graphical representation of the question."""
         # Frame initialization and configuration
         super().__init__(root, borderwidth=2, relief=tk.SOLID, height = 50, width = 100, **kwargs)
-        self.question_ctrl = question_ctrl
         # Styling the frame
         self.color = "sky blue" # Color chart: https://cs111.wellesley.edu/archive/cs111_fall14/public_html/labs/lab12/tkintercolor.html
         self.configure(background=self.color)
@@ -30,23 +28,29 @@ class QuestionView(tk.Frame):
         """Hides the QuestionView frame without destroying the object."""
         self.pack_forget()
 
-    def set_question_ctrl(self, question_ctrl):
-        """Sets the controller to the view. The display is initialized after receiving the controller."""
-        self.question_ctrl = question_ctrl
-
     def init_display(self):
         """Initializes the widgets with default values."""
         self.question_lab = tk.Label(self, text="Question", background="light goldenrod")
         self.question_lab.pack()
         for i in range(self.choice_nb):
-            choice_radbut = tk.Radiobutton(self, text="capital", value="capital", variable=self.choice_strvar, command=self.question_ctrl.print_choice, background=self.color) # type: ignore
+            choice_radbut = tk.Radiobutton(self, text="capital", value="capital", variable=self.choice_strvar, background=self.color) # type: ignore
             choice_radbut.pack(anchor=tk.W, padx=10) # align to left
             self.question_choices_radbut.append(choice_radbut)
-        self.submit_but = tk.Button(self, text="Submit answer", command=self.question_ctrl.check_result, background="PaleGreen2") # type: ignore
+        self.submit_but = tk.Button(self, text="Submit answer", background="PaleGreen2") # type: ignore
         self.submit_but.pack()
         self.counter_lab = tk.Label(self, text="You have answered: 0/total", background=self.color)
         self.counter_lab.pack()
         self.back_to_menu_but.pack()
+
+    # Command / Action Setters
+    def set_submit_command(self, func):
+        """Sets the submit button command."""
+        self.submit_but.configure(command=func)
+
+    def set_choice_command(self, func):
+        """Sets the choice radio buttons command."""
+        for choice_radbut in self.question_choices_radbut:
+            choice_radbut.configure(command=func)
 
     def get_choice_val(self):
         """Gets the choice value."""
