@@ -13,48 +13,53 @@ from menuview import *
 
 class App(tk.Tk):
     def __init__(self, **kwargs):
+        """Initializes the root window of the application and display it in the middle of the screen."""
         super().__init__(**kwargs) # Iinitialize the class using the constructor of Tk
         self.title("MCQ - Countries capital")
-        self.appWidth = 600
-        self.appHeight = 600
-        self.appStartX, self.appStartY = self.getCenteredStartingPos()
-        self.geometry("{width}x{height}+{startX}+{startY}".format(
-            width = self.appWidth, height = self.appHeight, 
-            startX=self.appStartX, startY=self.appStartY))
-        self.currentWindow = MenuView(self)
-        self.currentWindow.display()
+        self.app_width = 600
+        self.app_height = 600
+        self.app_start_x, self.app_start_y = self.get_centered_starting_pos()
+        self.geometry("{width}x{height}+{start_x}+{start_y}".format(
+            width = self.app_width, height = self.app_height, 
+            start_x=self.app_start_x, start_y=self.app_start_y))
+        self.current_window = MenuView(self)
+        self.current_window.display()
 
-    def getCenteredStartingPos(self):
-        """
-        Returns the centerd starting position on the basis of the screen size 
-        and the application size in pixels.
-        """
-        screenWidth = self.winfo_screenwidth()
-        screenHeight = self.winfo_screenheight()
-        appStartX = screenWidth // 2 - self.appWidth // 2
-        appStartY = screenHeight // 2 - self.appHeight // 2
-        return appStartX, appStartY
+    def get_centered_starting_pos(self):
+        """Returns the centerd starting position on the basis of the screen size 
+        and the application size in pixels, in order to display the application centered
+        on the screen of the computer."""
 
-    def displayQuestionView(self):
-        self.currentWindow.hide()
-        # Create the question view
-        qV = QuestionView(self)
-        # Create the question controller
-        qC = QuestionController(qV)
-        # Set the controller to the view
-        qV.setQuestionController(qC)
-        qC.run() # Start the program through the controller
-        self.currentWindow = qV
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        app_start_x = screen_width // 2 - self.app_width // 2
+        app_start_y = screen_height // 2 - self.app_height // 2
+        return app_start_x, app_start_y
 
-    def displayMenuView(self):
+    def display_question_view(self):
+        """Displays the view allowing to display the questions to answer."""
+        self.current_window.hide()
+        # 1 Create the question view
+        question_view = QuestionView(self)
+        # 2 Create the question controller and give the view to the controller
+        question_ctrl = QuestionController(question_view)
+        # 3 Set the controller to the view
+        question_view.set_question_ctrl(question_ctrl)
+        # 4 Start the program through the controller
+        question_ctrl.run()
+        self.current_window = question_view
+
+    def display_menu_view(self):
+        """Displays the starting main menu of the application."""
         reponse = messagebox.askquestion(title="Going back to the menu", message="Are you sure?")
         if reponse == messagebox.YES:
-            self.currentWindow.hide()
-            self.currentWindow = MenuView(self)
-            self.currentWindow.display()
+            self.current_window.hide()
+            self.current_window = MenuView(self)
+            self.current_window.display()
 
     def run(self):
-        self.mainloop() # Starts the display of the application
+        """Sarts the display of the application"""
+        self.mainloop()
 
 if __name__ == "__main__":
     print("MCQ launched")

@@ -7,63 +7,81 @@ import random as rand
 
 class QuestionController: # This class makes the link between model and view
     # Create question, move to the next question when answered
-    def __init__(self, qV):
-        self.qV = qV
-        # Get parse the data
-        p = Parser()
-        self.countries = p.getCountries()
+    def __init__(self, question_view):
+        """Initializes the QuestionController object."""
+        self.question_view = question_view
+        # Get parsed the data
+        parser = Parser()
+        self.countries = parser.get_countries()
         print("Countries parsed: ", len(self.countries))
         self.questions = []
-        self.strVarChoice = tk.StringVar(self.qV, value="Default")
-        self.curQ = 0
-        self.goodAnswerNb = 0
+        self.choice_strvar = tk.StringVar(self.question_view, value="Default") # used to store the choice of the question answer
+        self.current_question = 0
+        self.good_answer_nb = 0
+
     def run(self):
-        self.createQuestions()
-        self.qV.initDisplay()
-        self.loadQ()
-        self.qV.display()
-    def createQuestion(self, i = 0):
+        """Creates the questions and displays the first question."""
+        self.create_questions()
+        self.question_view.init_display()
+        self.load_question()
+        self.question_view.display()
+
+    def create_question(self, i = 0):
+        """Creates the question using the given index i."""
         i = i if i <= len(self.countries) else len(self.countries)
-        qM = QuestionModel(self.countries[i], self.countries)
-        return qM
-    def createQuestions(self, qNb = 10):
-        if qNb > len(self.countries):
-            qNb = len(self.countries)
-        randCountries = rand.sample(self.countries, qNb)
-        for i in range(qNb):
-            self.questions.append(QuestionModel(randCountries[i], self.countries))
-    def getQuestions(self):
+        question_model = QuestionModel(self.countries[i], self.countries)
+        return question_model
+    
+    def create_questions(self, question_nb = 10):
+        """Creates the questions by taking random countries"""
+        if question_nb > len(self.countries):
+            question_nb = len(self.countries)
+        rand_countries = rand.sample(self.countries, question_nb)
+        for i in range(question_nb):
+            self.questions.append(QuestionModel(rand_countries[i], self.countries))
+
+    def get_questions(self):
+        """Gets questions."""
         return self.questions
-    def getStrVarChoice(self):
-        return self.strVarChoice
-    def setQV(self, qV):
-        self.qV = qV
-        self.strVarChoice = tk.StringVar(self.qV, value="Default")
+    
+    def get_choice_strvar(self):
+        """Gets choice_strvar."""
+        return self.choice_strvar
+    
+    def set_question_view(self, question_view):
+        """Sets question_view."""
+        self.question_view = question_view
+        self.choice_strvar = tk.StringVar(self.question_view, value="Default")
+
     # Actions
-    def printChoice(self):
-        print(self.strVarChoice.get())
-    def checkResult(self): # called at each submit of answer
-        self.strVarChoice = self.qV.strVarChoice # get the selected value from the view
-        if self.strVarChoice.get() == self.questions[self.curQ].getAnswer():
+    def print_choice(self):
+        """Prints radio buttons choice."""
+        print(self.choice_strvar.get())
+
+    def check_result(self): # called at each submit of answer
+        """Check the answer choosen and loads the next question if there is one, otherwise """
+        # Check the selected value from the view
+        self.choice_strvar = self.question_view.choice_strvar
+        if self.choice_strvar.get() == self.questions[self.current_question].get_answer():
             print("The answer is correct")
-            self.goodAnswerNb += 1
+            self.good_answer_nb += 1
         else:
             print("The answer is wrong")
         # load next question
-        if self.curQ + 1 < len(self.questions):
-            self.curQ += 1
-            self.loadQ()
+        if self.current_question + 1 < len(self.questions):
+            self.current_question += 1
+            self.load_question()
         else:
-            self.qV.hideWidgets()
-            self.qV.setResult(self.goodAnswerNb, len(self.questions))
-            self.qV.showResult()
-        self.qV.setProgressText(f"You have answered: {self.curQ} / {len(self.questions)}")  
-    def loadQ(self):
-        self.qV.setQuestionText(self.questions[self.curQ].getQuestion())
-        self.qV.setQuestionChoices(self.questions[self.curQ].getMultipleChoice())
-        self.qV.setProgressText(f"You have answered: {self.curQ} / {len(self.questions)}")
+            self.question_view.hide_widgets()
+            self.question_view.set_result(self.good_answer_nb, len(self.questions))
+            self.question_view.show_result()
+        self.question_view.set_progress_text(f"You have answered: {self.current_question} / {len(self.questions)}") 
+
+    def load_question(self):
+        """Loads the current question"""
+        self.question_view.set_question_text(self.questions[self.current_question].get_question())
+        self.question_view.set_question_choices(self.questions[self.current_question].get_multiple_choice())
+        self.question_view.set_progress_text(f"You have answered: {self.current_question} / {len(self.questions)}")
 
 if __name__ == "__main__":
     print("Test")
-    #qV = None
-    #qc = QuestionController(qV)

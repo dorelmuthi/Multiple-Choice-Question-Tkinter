@@ -2,9 +2,12 @@
 Parsing the countries
 
 16/06/2025
-Create the question controller.
+Create the question view.
+Create the question controller which uses the question model.
+
 17/06/2025
-The question controller is now doing the actions related to the View clicks.
+Make the question controller to do the actions related to the View clicks.
+
 18/06/2025
 Add a label to display the number of questions answered on the total of questions.
 
@@ -30,3 +33,14 @@ https://www.tutorialspoint.com/how-to-separate-view-and-controller-in-python-tki
 Code maintenable Python:
 https://openclassrooms.com/fr/courses/7160741-ecrivez-du-code-python-maintenable/7188877-implementez-le-controleur-et-la-vue-pour-votre-application
 
+13/08/2025
+Make changes to correspond better to MVC architecture.
+Add a main menu.
+
+13/09/2025
+Rename files, variables and functions to correspond to PEP 8.
+Add docstrings
+
+15/09/2025
+Variables and functions to correspond to PEP 8.
+Add docstrings
