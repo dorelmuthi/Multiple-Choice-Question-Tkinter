@@ -15,7 +15,6 @@ class QuestionController: # This class makes the link between model and view
         self.countries = parser.get_countries()
         print("Countries parsed: ", len(self.countries))
         self.questions = []
-        self.choice_strvar = tk.StringVar(self.question_view, value="Default") # used to store the choice of the question answer
         self.current_question = 0
         self.good_answer_nb = 0
 
@@ -44,25 +43,18 @@ class QuestionController: # This class makes the link between model and view
         """Gets questions."""
         return self.questions
     
-    def get_choice_strvar(self):
-        """Gets choice_strvar."""
-        return self.choice_strvar
-    
     def set_question_view(self, question_view):
         """Sets question_view."""
         self.question_view = question_view
-        self.choice_strvar = tk.StringVar(self.question_view, value="Default")
 
     # Actions
     def print_choice(self):
         """Prints radio buttons choice."""
-        print(self.choice_strvar.get())
+        print(self.question_view.get_choice_val())
 
     def check_result(self): # called at each submit of answer
         """Check the answer choosen and loads the next question if there is one, otherwise """
-        # Check the selected value from the view
-        self.choice_strvar = self.question_view.choice_strvar
-        if self.choice_strvar.get() == self.questions[self.current_question].get_answer():
+        if self.question_view.get_choice_val() == self.questions[self.current_question].get_answer():
             print("The answer is correct")
             self.good_answer_nb += 1
         else:

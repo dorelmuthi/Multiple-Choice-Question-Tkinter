@@ -39,7 +39,7 @@ class QuestionView(tk.Frame):
         self.question_lab = tk.Label(self, text="Question", background="light goldenrod")
         self.question_lab.pack()
         for i in range(self.choice_nb):
-            choice_radbut = tk.Radiobutton(self, text="capital", value="capital", variable=self.choice_strvar, command=self.print_choice, background=self.color)
+            choice_radbut = tk.Radiobutton(self, text="capital", value="capital", variable=self.choice_strvar, command=self.question_ctrl.print_choice, background=self.color) # type: ignore
             choice_radbut.pack(anchor=tk.W, padx=10) # align to left
             self.question_choices_radbut.append(choice_radbut)
         self.submit_but = tk.Button(self, text="Submit answer", command=self.question_ctrl.check_result, background="PaleGreen2") # type: ignore
@@ -48,10 +48,10 @@ class QuestionView(tk.Frame):
         self.counter_lab.pack()
         self.back_to_menu_but.pack()
 
-    def print_choice(self):
-        """Prints in console the value of the answer choosen to the question."""
-        print(self.choice_strvar.get())
-
+    def get_choice_val(self):
+        """Gets the choice value."""
+        return self.choice_strvar.get()
+    
     def set_question_text(self, question_text: str):
         """Sets the question text in the question label."""
         self.question_lab.configure(text=question_text)
