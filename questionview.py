@@ -1,14 +1,15 @@
-from main import App 
+from main import App
+from constants import * 
 import tkinter as tk
 
 class QuestionView(tk.Frame):
     def __init__(self, root: App, **kwargs):
         """Initializes the QuestionView class which is the graphical representation of the question."""
         # Frame initialization and configuration
-        super().__init__(root, borderwidth=2, relief=tk.SOLID, height = 50, width = 100, **kwargs)
+        super().__init__(root, borderwidth=2, relief=tk.SOLID, height = 50, width = root.app_width, **kwargs)
         # Styling the frame
-        self.color = "sky blue" # Color chart: https://cs111.wellesley.edu/archive/cs111_fall14/public_html/labs/lab12/tkintercolor.html
-        self.configure(background=self.color)
+        self.background_color = BACKGROUND_COLOR # Color chart: https://cs111.wellesley.edu/archive/cs111_fall14/public_html/labs/lab12/tkintercolor.html
+        self.configure(background=self.background_color)
         # Frame widgets initialization with empty constructors
         self.question_lab = tk.Label() # Displays the question.
         self.question_choices_radbut = [] # Radio buttons to display the choices and to choose the anwser to the quesiton.
@@ -33,12 +34,12 @@ class QuestionView(tk.Frame):
         self.question_lab = tk.Label(self, text="Question", background="light goldenrod")
         self.question_lab.pack()
         for i in range(self.choice_nb):
-            choice_radbut = tk.Radiobutton(self, text="capital", value="capital", variable=self.choice_strvar, background=self.color) # type: ignore
+            choice_radbut = tk.Radiobutton(self, text="capital", value="capital", variable=self.choice_strvar, background=self.background_color) # type: ignore
             choice_radbut.pack(anchor=tk.W, padx=10) # align to left
             self.question_choices_radbut.append(choice_radbut)
         self.submit_but = tk.Button(self, text="Submit answer", background="PaleGreen2") # type: ignore
         self.submit_but.pack()
-        self.counter_lab = tk.Label(self, text="You have answered: 0/total", background=self.color)
+        self.counter_lab = tk.Label(self, text="You have answered: 0/total", background=self.background_color)
         self.counter_lab.pack()
         self.back_to_menu_but.pack()
 
@@ -83,7 +84,7 @@ class QuestionView(tk.Frame):
 
     def set_result(self, goodAnswerNb, total):
         """Sets the result text (the number of correctly anwsered question on the total) in result label."""
-        self.result_lab = tk.Label(self, text=f"You have answered correctly to {goodAnswerNb} / {total}", background=self.color)
+        self.result_lab = tk.Label(self, text=f"You have answered correctly to {goodAnswerNb} / {total}", background=self.background_color)
     
     def show_result(self):
         """Place and display the result label in the QuestionView frame."""

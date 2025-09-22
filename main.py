@@ -10,6 +10,7 @@ from tkinter import messagebox
 from questionctrl import *
 from questionview import *
 from menuview import *
+from constants import *
 
 class App(tk.Tk):
     def __init__(self, **kwargs):
@@ -22,6 +23,7 @@ class App(tk.Tk):
         self.geometry("{width}x{height}+{start_x}+{start_y}".format(
             width = self.app_width, height = self.app_height, 
             start_x=self.app_start_x, start_y=self.app_start_y))
+        self.configure(background=BACKGROUND_COLOR)
         self.current_window = MenuView(self)
         self.current_window.display()
 

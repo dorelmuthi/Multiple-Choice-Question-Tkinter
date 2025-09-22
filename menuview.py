@@ -1,11 +1,10 @@
 import tkinter as tk
 from tkinter import messagebox
-#from main import *
 
 class MenuView(tk.Frame):
     def __init__(self, root, **kwargs):
         """Initializes MenuView object."""
-        super().__init__(root,  borderwidth=2, relief=tk.SOLID, height = 50, width = 100, **kwargs)
+        super().__init__(root,  borderwidth=2, relief=tk.SOLID, height = 50, width = root.app_width, **kwargs)
         self.color = "sky blue" # Color chart: https://cs111.wellesley.edu/archive/cs111_fall14/public_html/labs/lab12/tkintercolor.html
         self.configure(background=self.color)
         self.start_but = tk.Button(self, text="Start", command=root.display_question_view)
