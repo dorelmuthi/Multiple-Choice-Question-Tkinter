@@ -28,7 +28,7 @@ class App(tk.Tk):
         self.current_window.display()
 
     def get_centered_starting_pos(self):
-        """Returns the centerd starting position on the basis of the screen size 
+        """Returns the centered starting position on the basis of the screen size 
         and the application size in pixels, in order to display the application centered
         on the screen of the computer."""
         screen_width = self.winfo_screenwidth()
